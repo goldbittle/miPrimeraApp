@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
             timeInMilliseconds = SystemClock.uptimeMillis() - starTime;
 
             if (timeInMilliseconds>=maxTime) {
-                titulo.setText("GAME OVER");
+                clock.setText("GAME OVER");
             }else {
                 updateTime = timeSwapBuff + timeInMilliseconds;
                 int secs = (int) (updateTime / 1000);
@@ -66,40 +66,46 @@ public class MainActivity extends AppCompatActivity {
         button1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                if (cont== 0)
-                    Toast.makeText(MainActivity.this, "It's works", Toast.LENGTH_LONG).show();
-                cont++;
-                titulo.setText("Click "+cont+" Botón 1");
-                button1.setVisibility(View.INVISIBLE);
-                numButtons--;
-                if (numButtons==0)
-                    choseButtons();
+                if (timeInMilliseconds < maxTime) {
+                    if (cont == 0)
+                        Toast.makeText(MainActivity.this, "It's works", Toast.LENGTH_LONG).show();
+                    cont++;
+                    titulo.setText("Click " + cont);
+                    button1.setVisibility(View.INVISIBLE);
+                    numButtons--;
+                    if (numButtons == 0)
+                        choseButtons();
+                }
             }
         });
         button2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                if (cont== 0)
-                    Toast.makeText(MainActivity.this, "It's works", Toast.LENGTH_LONG).show();
-                cont++;
-                titulo.setText("Click "+cont+" Botón 2");
-                button2.setVisibility(View.INVISIBLE);
-                numButtons--;
-                if (numButtons==0)
-                    choseButtons();
+                if (timeInMilliseconds < maxTime) {
+                    if (cont == 0)
+                        Toast.makeText(MainActivity.this, "It's works", Toast.LENGTH_LONG).show();
+                    cont++;
+                    titulo.setText("Click " + cont);
+                    button2.setVisibility(View.INVISIBLE);
+                    numButtons--;
+                    if (numButtons == 0)
+                        choseButtons();
+                }
             }
         });
         button3.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                if (cont== 0)
-                    Toast.makeText(MainActivity.this, "It's works", Toast.LENGTH_LONG).show();
-                cont++;
-                titulo.setText("Click "+cont+" Botón 3");
-                button3.setVisibility(View.INVISIBLE);
-                numButtons--;
-                if (numButtons==0)
-                    choseButtons();
+                if (timeInMilliseconds<maxTime) {
+                    if (cont == 0)
+                        Toast.makeText(MainActivity.this, "It's works", Toast.LENGTH_LONG).show();
+                    cont++;
+                    titulo.setText("Click " + cont);
+                    button3.setVisibility(View.INVISIBLE);
+                    numButtons--;
+                    if (numButtons == 0)
+                        choseButtons();
+                }
             }
         });
         startButton.setOnClickListener(new View.OnClickListener(){
@@ -114,6 +120,10 @@ public class MainActivity extends AppCompatActivity {
 
                 customHandler.postDelayed(updateTimerThread, 0);
 
+                button1.setVisibility(View.INVISIBLE);
+                button2.setVisibility(View.INVISIBLE);
+                button3.setVisibility(View.INVISIBLE);
+
                 numButtons = 0;
                 choseButtons();
             }
@@ -121,8 +131,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void choseButtons(){
-        if (timeInMilliseconds>=maxTime)
-            return;
         final int random = new Random().nextInt(7) + 1;
         switch (random){
             case 1:
