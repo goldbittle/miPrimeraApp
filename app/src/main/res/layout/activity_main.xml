@@ -16,38 +16,94 @@
         android:text="@string/hola_mundo" />
 
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="1">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center">
+
         <ImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/imageButtonF1C1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#FFFFFF"
-            app:srcCompat="@android:drawable/sym_def_app_icon"
-            android:contentDescription="@string/todo"
-            android:layout_gravity="center" />
+            android:layout_gravity="bottom"
+
+
+            android:background="@drawable/anima_boton" />
+
         <ImageButton
-            android:id="@+id/imageButton3"
+            android:id="@+id/imageButtonF1C2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#FFFFFF"
-            app:srcCompat="@android:drawable/sym_def_app_icon"
-            android:contentDescription="@string/todo"
-            android:layout_gravity="center" />
+            android:layout_gravity="bottom"
+
+            android:background="@drawable/anima_boton" />
+
         <ImageButton
-            android:id="@+id/imageButton4"
+            android:id="@+id/imageButtonF1C3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#FFFFFF"
-            app:srcCompat="@android:drawable/sym_def_app_icon"
-            android:contentDescription="@string/todo"
-            android:layout_gravity="center" />
-</LinearLayout>
+            android:layout_gravity="bottom"
+
+            android:background="@drawable/anima_boton" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <ImageButton
+            android:id="@+id/imageButtonF2C1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/anima_boton" />
+
+        <ImageButton
+            android:id="@+id/imageButtonF2C2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/anima_boton" />
+
+        <ImageButton
+            android:id="@+id/imageButtonF2C3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/anima_boton" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <ImageButton
+            android:id="@+id/imageButtonF3C1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:background="@drawable/anima_boton" />
+
+        <ImageButton
+            android:id="@+id/imageButtonF3C2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:background="@drawable/anima_boton" />
+
+        <ImageButton
+            android:id="@+id/imageButtonF3C3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:background="@drawable/anima_boton" />
+    </LinearLayout>
     <TextView
         android:id="@+id/textClock"
         android:layout_width="match_parent"

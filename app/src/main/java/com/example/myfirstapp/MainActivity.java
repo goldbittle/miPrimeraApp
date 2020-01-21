@@ -18,7 +18,10 @@ import java.util.Timer;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageButton button1, button2,button3;
+    ImageButton buttonF1C1, buttonF1C2,buttonF1C3;
+    ImageButton buttonF2C1, buttonF2C2,buttonF2C3;
+    ImageButton buttonF3C1, buttonF3C2,buttonF3C3;
+
     Button startButton;
     int cont = 0;
     int numButtons=0;
@@ -57,51 +60,134 @@ public class MainActivity extends AppCompatActivity {
         titulo = (TextView)  findViewById(R.id.textView);
         clock = (TextView)  findViewById(R.id.textClock);
 
-        button1 = (ImageButton) findViewById(R.id.imageButton2);
-        button2 = (ImageButton) findViewById(R.id.imageButton3);
-        button3 = (ImageButton) findViewById(R.id.imageButton4);
+        buttonF1C1 = (ImageButton) findViewById(R.id.imageButtonF1C1);
+        buttonF1C2 = (ImageButton) findViewById(R.id.imageButtonF1C2);
+        buttonF1C3 = (ImageButton) findViewById(R.id.imageButtonF1C3);
+
+        buttonF2C1 = (ImageButton) findViewById(R.id.imageButtonF2C1);
+        buttonF2C2 = (ImageButton) findViewById(R.id.imageButtonF2C2);
+        buttonF2C3 = (ImageButton) findViewById(R.id.imageButtonF2C3);
+
+        buttonF3C1 = (ImageButton) findViewById(R.id.imageButtonF3C1);
+        buttonF3C2 = (ImageButton) findViewById(R.id.imageButtonF3C2);
+        buttonF3C3 = (ImageButton) findViewById(R.id.imageButtonF3C3);
 
         startButton = (Button) findViewById (R.id.button);
 
-        button1.setOnClickListener(new View.OnClickListener(){
+        buttonF1C1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 if (timeInMilliseconds < maxTime) {
-                    if (cont == 0)
-                        Toast.makeText(MainActivity.this, "It's works", Toast.LENGTH_LONG).show();
                     cont++;
                     titulo.setText("Click " + cont);
-                    button1.setVisibility(View.INVISIBLE);
+                    buttonF1C1.setVisibility(View.INVISIBLE);
                     numButtons--;
                     if (numButtons == 0)
                         choseButtons();
                 }
             }
         });
-        button2.setOnClickListener(new View.OnClickListener(){
+        buttonF1C2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 if (timeInMilliseconds < maxTime) {
-                    if (cont == 0)
-                        Toast.makeText(MainActivity.this, "It's works", Toast.LENGTH_LONG).show();
                     cont++;
                     titulo.setText("Click " + cont);
-                    button2.setVisibility(View.INVISIBLE);
+                    buttonF1C2.setVisibility(View.INVISIBLE);
                     numButtons--;
                     if (numButtons == 0)
                         choseButtons();
                 }
             }
         });
-        button3.setOnClickListener(new View.OnClickListener(){
+        buttonF1C3.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 if (timeInMilliseconds<maxTime) {
-                    if (cont == 0)
-                        Toast.makeText(MainActivity.this, "It's works", Toast.LENGTH_LONG).show();
                     cont++;
                     titulo.setText("Click " + cont);
-                    button3.setVisibility(View.INVISIBLE);
+                    buttonF1C3.setVisibility(View.INVISIBLE);
+                    numButtons--;
+                    if (numButtons == 0)
+                        choseButtons();
+                }
+            }
+        });
+
+        buttonF2C1.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if (timeInMilliseconds < maxTime) {
+                    cont++;
+                    titulo.setText("Click " + cont);
+                    buttonF2C1.setVisibility(View.INVISIBLE);
+                    numButtons--;
+                    if (numButtons == 0)
+                        choseButtons();
+                }
+            }
+        });
+        buttonF2C2.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if (timeInMilliseconds < maxTime) {
+                    cont++;
+                    titulo.setText("Click " + cont);
+                    buttonF2C2.setVisibility(View.INVISIBLE);
+                    numButtons--;
+                    if (numButtons == 0)
+                        choseButtons();
+                }
+            }
+        });
+        buttonF2C3.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if (timeInMilliseconds < maxTime) {
+                    cont++;
+                    titulo.setText("Click " + cont);
+                    buttonF2C3.setVisibility(View.INVISIBLE);
+                    numButtons--;
+                    if (numButtons == 0)
+                        choseButtons();
+                }
+            }
+        });
+
+        buttonF3C1.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if (timeInMilliseconds < maxTime) {
+                    cont++;
+                    titulo.setText("Click " + cont);
+                    buttonF3C1.setVisibility(View.INVISIBLE);
+                    numButtons--;
+                    if (numButtons == 0)
+                        choseButtons();
+                }
+            }
+        });
+
+        buttonF3C2.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if (timeInMilliseconds < maxTime) {
+                    cont++;
+                    titulo.setText("Click " + cont);
+                    buttonF3C2.setVisibility(View.INVISIBLE);
+                    numButtons--;
+                    if (numButtons == 0)
+                        choseButtons();
+                }
+            }
+        });
+        buttonF3C3.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if (timeInMilliseconds < maxTime) {
+                    cont++;
+                    titulo.setText("Click " + cont);
+                    buttonF3C3.setVisibility(View.INVISIBLE);
                     numButtons--;
                     if (numButtons == 0)
                         choseButtons();
@@ -120,9 +206,17 @@ public class MainActivity extends AppCompatActivity {
 
                 customHandler.postDelayed(updateTimerThread, 0);
 
-                button1.setVisibility(View.INVISIBLE);
-                button2.setVisibility(View.INVISIBLE);
-                button3.setVisibility(View.INVISIBLE);
+                buttonF1C1.setVisibility(View.INVISIBLE);
+                buttonF1C2.setVisibility(View.INVISIBLE);
+                buttonF1C3.setVisibility(View.INVISIBLE);
+
+                buttonF2C1.setVisibility(View.INVISIBLE);
+                buttonF2C2.setVisibility(View.INVISIBLE);
+                buttonF2C3.setVisibility(View.INVISIBLE);
+
+                buttonF3C1.setVisibility(View.INVISIBLE);
+                buttonF3C2.setVisibility(View.INVISIBLE);
+                buttonF3C3.setVisibility(View.INVISIBLE);
 
                 numButtons = 0;
                 choseButtons();
@@ -131,48 +225,58 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void choseButtons(){
-        final int random = new Random().nextInt(7) + 1;
-        switch (random){
-            case 1:
-                button1.setVisibility(View.VISIBLE);
-                numButtons=1;
-                break;
-            case 2:
-                button2.setVisibility(View.VISIBLE);
-                numButtons=1;
-                break;
-            case 3:
-                button3.setVisibility(View.VISIBLE);
-                numButtons=1;
-                break;
-            case 4:
-                button1.setVisibility(View.VISIBLE);
-                button2.setVisibility(View.VISIBLE);
-                numButtons=2;
-                break;
-            case 5:
-                button1.setVisibility(View.VISIBLE);
-                button3.setVisibility(View.VISIBLE);
-                numButtons=2;
-            break;
-            case 6:
-                button2.setVisibility(View.VISIBLE);
-                button3.setVisibility(View.VISIBLE);
-                numButtons=2;
-                break;
-            case 7:
-                button1.setVisibility(View.VISIBLE);
-                button2.setVisibility(View.VISIBLE);
-                button3.setVisibility(View.VISIBLE);
-                numButtons=3;
-                break;
+        numButtons= new Random().nextInt(3) + 1;
+        int random2 = 0;
+        int exclude1=0,exclude2=0;
+        for (int i=0; i<numButtons; i++){
+            switch (i){
+                case 0:
+                    exclude1 = random2 = new Random().nextInt(9) + 1;
+                    break;
+                case 1:
+                    do {
+                        exclude2 = random2 = new Random().nextInt(9) + 1;
+                    }while (random2 == exclude1);
+
+                    break;
+                case 2:
+                    do {
+                        random2 = new Random().nextInt(9) + 1;
+                    }while ((random2 == exclude1) || (random2 == exclude2));
+
+                    break;
+            }
+
+            switch (random2){
+                case 1:
+                    buttonF1C1.setVisibility(View.VISIBLE);
+                    break;
+                case 2:
+                    buttonF1C2.setVisibility(View.VISIBLE);
+                    break;
+                case 3:
+                    buttonF1C3.setVisibility(View.VISIBLE);
+                    break;
+                case 4:
+                    buttonF2C1.setVisibility(View.VISIBLE);
+                    break;
+                case 5:
+                    buttonF2C2.setVisibility(View.VISIBLE);
+                    break;
+                case 6:
+                    buttonF2C3.setVisibility(View.VISIBLE);
+                    break;
+                case 7:
+                    buttonF3C1.setVisibility(View.VISIBLE);
+                    break;
+                case 8:
+                    buttonF3C2.setVisibility(View.VISIBLE);
+                    break;
+                case 9:
+                    buttonF3C3.setVisibility(View.VISIBLE);
+                    break;
+
+            }
         }
-
-    }
-
-    protected void onStart(Bundle savedInstanceState){
-
-        titulo.setText("onStart");
-        choseButtons();
     }
 }
