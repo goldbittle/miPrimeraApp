@@ -39,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
 
             if (timeInMilliseconds>=maxTime) {
                 clock.setText("GAME OVER");
+                Toast toast = Toast.makeText(MainActivity.this, "GAME OVER", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
             }else {
                 updateTime = timeSwapBuff + timeInMilliseconds;
                 int secs = (int) (updateTime / 1000);
@@ -47,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 int hour = mins / 60;
                 mins %= 60;
                 int miliseconds = (int) (updateTime % 1000);
-                clock.setText("" + String.format("%08d", timeInMilliseconds) + " - " + String.format("%02d", hour) + ":" + String.format("%02d", mins) + ":" + String.format("%02d", secs) + "." + String.format("%03d", miliseconds));
+                clock.setText("" + String.format("%02d", mins) + ":" + String.format("%02d", secs));
                 customHandler.postDelayed(this, 0);
             }
         }
@@ -79,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (timeInMilliseconds < maxTime) {
                     cont++;
-                    titulo.setText("Click " + cont);
+                    titulo.setText("SCORE: "+String.format("%02d", cont));
                     buttonF1C1.setVisibility(View.INVISIBLE);
                     numButtons--;
                     if (numButtons == 0)
@@ -92,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (timeInMilliseconds < maxTime) {
                     cont++;
-                    titulo.setText("Click " + cont);
+                    titulo.setText("SCORE: "+String.format("%02d", cont));
                     buttonF1C2.setVisibility(View.INVISIBLE);
                     numButtons--;
                     if (numButtons == 0)
@@ -105,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (timeInMilliseconds<maxTime) {
                     cont++;
-                    titulo.setText("Click " + cont);
+                    titulo.setText("SCORE: "+String.format("%02d", cont));
                     buttonF1C3.setVisibility(View.INVISIBLE);
                     numButtons--;
                     if (numButtons == 0)
@@ -119,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (timeInMilliseconds < maxTime) {
                     cont++;
-                    titulo.setText("Click " + cont);
+                    titulo.setText("SCORE: "+String.format("%02d", cont));
                     buttonF2C1.setVisibility(View.INVISIBLE);
                     numButtons--;
                     if (numButtons == 0)
@@ -132,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (timeInMilliseconds < maxTime) {
                     cont++;
-                    titulo.setText("Click " + cont);
+                    titulo.setText("SCORE: "+String.format("%02d", cont));
                     buttonF2C2.setVisibility(View.INVISIBLE);
                     numButtons--;
                     if (numButtons == 0)
@@ -145,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (timeInMilliseconds < maxTime) {
                     cont++;
-                    titulo.setText("Click " + cont);
+                    titulo.setText("SCORE: "+String.format("%02d", cont));
                     buttonF2C3.setVisibility(View.INVISIBLE);
                     numButtons--;
                     if (numButtons == 0)
@@ -159,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (timeInMilliseconds < maxTime) {
                     cont++;
-                    titulo.setText("Click " + cont);
+                    titulo.setText("SCORE: "+String.format("%02d", cont));
                     buttonF3C1.setVisibility(View.INVISIBLE);
                     numButtons--;
                     if (numButtons == 0)
@@ -173,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (timeInMilliseconds < maxTime) {
                     cont++;
-                    titulo.setText("Click " + cont);
+                    titulo.setText("SCORE: "+String.format("%02d", cont));
                     buttonF3C2.setVisibility(View.INVISIBLE);
                     numButtons--;
                     if (numButtons == 0)
@@ -186,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (timeInMilliseconds < maxTime) {
                     cont++;
-                    titulo.setText("Click " + cont);
+                    titulo.setText("SCORE: "+String.format("%02d", cont));
                     buttonF3C3.setVisibility(View.INVISIBLE);
                     numButtons--;
                     if (numButtons == 0)
