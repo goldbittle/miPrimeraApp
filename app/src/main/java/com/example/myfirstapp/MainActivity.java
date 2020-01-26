@@ -23,45 +23,33 @@ public class MainActivity extends AppCompatActivity {
     ImageButton buttonF3C1, buttonF3C2,buttonF3C3;
 
     Button startButton;
+    boolean gameOver = false;
+    int level = 1;
+    int goal = 50;
     int cont = 0;
-    int numButtons=0;
-    TextView titulo;
+    int numButtons=150;
+    int numBtn = 3;
+    TextView score;
+    TextView levelTv;
+
     TextView clock;
-    long maxTime = 60000;
 
-    Handler customHandler = new Handler();
-    long starTime=0L,timeInMilliseconds=0L,timeSwapBuff=0L,updateTime=0L;
+    int maxTime = 60;
 
-    Runnable updateTimerThread = new Runnable() {
-        @Override
-        public void run() {
-            timeInMilliseconds = SystemClock.uptimeMillis() - starTime;
+    private void showLevelScore(int l, int s)
+    {
+        score.setText("ROSKIS: "+String.format("%03d", cont));
+        levelTv.setText("LEVEL "+String.format("%02d", level));
 
-            if (timeInMilliseconds>=maxTime) {
-                clock.setText("GAME OVER");
-                Toast toast = Toast.makeText(MainActivity.this, "GAME OVER", Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
-                startButton.setVisibility(View.VISIBLE);
-            }else {
-                updateTime = timeSwapBuff + timeInMilliseconds;
-                int secs = (int) (updateTime / 1000);
-                int mins = secs / 60;
-                secs %= 60;
-                int hour = mins / 60;
-                mins %= 60;
-                int miliseconds = (int) (updateTime % 1000);
-                clock.setText("" + String.format("%02d", mins) + ":" + String.format("%02d", secs));
-                customHandler.postDelayed(this, 0);
-            }
-        }
-    };
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        titulo = (TextView)  findViewById(R.id.textView);
+        score = (TextView)  findViewById(R.id.score);
+        levelTv = (TextView)  findViewById(R.id.level);
         clock = (TextView)  findViewById(R.id.textClock);
 
         buttonF1C1 = (ImageButton) findViewById(R.id.imageButtonF1C1);
@@ -81,9 +69,9 @@ public class MainActivity extends AppCompatActivity {
         buttonF1C1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                if (timeInMilliseconds < maxTime) {
+                if (!gameOver) {
                     cont++;
-                    titulo.setText("ROSKIS: "+String.format("%03d", cont));
+                    showLevelScore(level, cont);
                     buttonF1C1.setVisibility(View.INVISIBLE);
                     numButtons--;
                     if (numButtons == 0)
@@ -94,9 +82,9 @@ public class MainActivity extends AppCompatActivity {
         buttonF1C2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                if (timeInMilliseconds < maxTime) {
+                if (!gameOver) {
                     cont++;
-                    titulo.setText("ROSKIS: "+String.format("%03d", cont));
+                    showLevelScore(level, cont);
                     buttonF1C2.setVisibility(View.INVISIBLE);
                     numButtons--;
                     if (numButtons == 0)
@@ -107,9 +95,9 @@ public class MainActivity extends AppCompatActivity {
         buttonF1C3.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                if (timeInMilliseconds<maxTime) {
+                if (!gameOver) {
                     cont++;
-                    titulo.setText("ROSKIS: "+String.format("%03d", cont));
+                    showLevelScore(level, cont);
                     buttonF1C3.setVisibility(View.INVISIBLE);
                     numButtons--;
                     if (numButtons == 0)
@@ -121,9 +109,9 @@ public class MainActivity extends AppCompatActivity {
         buttonF2C1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                if (timeInMilliseconds < maxTime) {
+                if (!gameOver) {
                     cont++;
-                    titulo.setText("ROSKIS: "+String.format("%03d", cont));
+                    showLevelScore(level, cont);
                     buttonF2C1.setVisibility(View.INVISIBLE);
                     numButtons--;
                     if (numButtons == 0)
@@ -134,9 +122,9 @@ public class MainActivity extends AppCompatActivity {
         buttonF2C2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                if (timeInMilliseconds < maxTime) {
+                if (!gameOver) {
                     cont++;
-                    titulo.setText("ROSKIS: "+String.format("%03d", cont));
+                    showLevelScore(level, cont);
                     buttonF2C2.setVisibility(View.INVISIBLE);
                     numButtons--;
                     if (numButtons == 0)
@@ -147,9 +135,9 @@ public class MainActivity extends AppCompatActivity {
         buttonF2C3.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                if (timeInMilliseconds < maxTime) {
+                if (!gameOver) {
                     cont++;
-                    titulo.setText("ROSKIS: "+String.format("%03d", cont));
+                    showLevelScore(level, cont);
                     buttonF2C3.setVisibility(View.INVISIBLE);
                     numButtons--;
                     if (numButtons == 0)
@@ -161,9 +149,9 @@ public class MainActivity extends AppCompatActivity {
         buttonF3C1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                if (timeInMilliseconds < maxTime) {
+                if (!gameOver) {
                     cont++;
-                    titulo.setText("ROSKIS: "+String.format("%03d", cont));
+                    showLevelScore(level, cont);
                     buttonF3C1.setVisibility(View.INVISIBLE);
                     numButtons--;
                     if (numButtons == 0)
@@ -175,9 +163,9 @@ public class MainActivity extends AppCompatActivity {
         buttonF3C2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                if (timeInMilliseconds < maxTime) {
+                if (!gameOver) {
                     cont++;
-                    titulo.setText("ROSKIS: "+String.format("%03d", cont));
+                    showLevelScore(level, cont);
                     buttonF3C2.setVisibility(View.INVISIBLE);
                     numButtons--;
                     if (numButtons == 0)
@@ -188,9 +176,9 @@ public class MainActivity extends AppCompatActivity {
         buttonF3C3.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                if (timeInMilliseconds < maxTime) {
+                if (!gameOver) {
                     cont++;
-                    titulo.setText("ROSKIS: "+String.format("%03d", cont));
+                    showLevelScore(level, cont);
                     buttonF3C3.setVisibility(View.INVISIBLE);
                     numButtons--;
                     if (numButtons == 0)
@@ -198,17 +186,16 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+
         startButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Toast toast = Toast.makeText(MainActivity.this, "Let's Go!", Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
 
                 cont = 0;
-                starTime = SystemClock.uptimeMillis();
+                gameOver = false;
 
-                customHandler.postDelayed(updateTimerThread, 0);
+                showMessage("LET'S GO!");
 
                 buttonF1C1.setVisibility(View.INVISIBLE);
                 buttonF1C2.setVisibility(View.INVISIBLE);
@@ -225,16 +212,25 @@ public class MainActivity extends AppCompatActivity {
 
                 startButton.setVisibility(View.INVISIBLE);
 
+                showLevelScore(level, cont);
+
+                reverseTimer(getMaxTime(),clock);
                 numButtons = 0;
                 choseButtons();
             }
         });
     }
 
+    private void showMessage(String text){
+        Toast toast = Toast.makeText(MainActivity.this, text, Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+
+    }
     protected void choseButtons(){
-        numButtons= new Random().nextInt(3) + 1;
+        numButtons= new Random().nextInt(numBtn) + 1;
         int random2 = 0;
-        int exclude1=0,exclude2=0;
+        int exclude1=0,exclude2=0,exclude3=0,exclude4=0,exclude5=0;
         for (int i=0; i<numButtons; i++){
             switch (i){
                 case 0:
@@ -248,8 +244,20 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case 2:
                     do {
-                        random2 = new Random().nextInt(9) + 1;
+                        exclude3 = random2 = new Random().nextInt(9) + 1;
                     }while ((random2 == exclude1) || (random2 == exclude2));
+
+                    break;
+                case 3:
+                    do {
+                        exclude4 = random2 = new Random().nextInt(9) + 1;
+                    }while ((random2 == exclude1) || (random2 == exclude2) || (random2 == exclude3));
+
+                    break;
+                case 4:
+                    do {
+                        random2 = new Random().nextInt(9) + 1;
+                    }while ((random2 == exclude1) || (random2 == exclude2) || (random2 == exclude3) || (random2 == exclude4));
 
                     break;
             }
@@ -285,5 +293,61 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }
+    }
+
+    private void gameOver()
+    {
+        showMessage("GAME OVER!");
+        clock.setText("GAME OVER");
+        gameOver = true;
+    }
+
+    private int  getGoal()
+    {
+        return level * goal;
+    }
+
+    private int getMaxTime()
+    {
+        return maxTime;
+    }
+    private void levelUp()
+    {
+        showMessage("LEVEL UP!");
+        if (level<9)
+        {
+            level++;
+            if (numBtn<5)
+                numBtn++;
+
+        }
+
+        showLevelScore(level,cont);
+        reverseTimer(getMaxTime(),clock);
+        numButtons = 0;
+        choseButtons();
+    }
+
+    public void reverseTimer(int Seconds,final TextView tv){
+
+        new CountDownTimer(Seconds* 1000+1000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                int seconds = (int) (millisUntilFinished / 1000);
+                int minutes = seconds / 60;
+                seconds = seconds % 60;
+                tv.setText("TIME : " + String.format("%02d", minutes)
+                        + ":" + String.format("%02d", seconds));
+            }
+
+            public void onFinish() {
+                if (cont >= getGoal()){
+                    levelUp();
+                }
+                else{
+                    gameOver();
+                }
+            }
+        }.start();
     }
 }
