@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private final int initGoal = 100;
     private final int septGoal = 10;
+    private final int initNumBtn = 3;
 
     Button startButton;
     boolean gameOver = false;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     int score = 0;
     int contTime = 0;
     int numButtons=0;
-    int numBtn = 3;
+    int numBtn = initNumBtn;
     TextView scoreTv;
     TextView levelTv;
     TextView clockTv;
@@ -248,6 +249,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     score = 0;
                     goal = initGoal;
+                    numBtn = initNumBtn;
                 }
 
                 roskis = 0;
