@@ -22,25 +22,58 @@ public class MainActivity extends AppCompatActivity {
     ImageButton buttonF2C1, buttonF2C2,buttonF2C3;
     ImageButton buttonF3C1, buttonF3C2,buttonF3C3;
 
+    private final int initGoal = 100;
+    private final int septGoal = 10;
+
     Button startButton;
     boolean gameOver = false;
     int level = 1;
-    int goal = 50;
-    int cont = 0;
-    int numButtons=150;
+    int goal = initGoal;
+    int roskis = 0;
+    int score = 0;
+    int contTime = 0;
+    int numButtons=0;
     int numBtn = 3;
-    TextView score;
+    TextView scoreTv;
     TextView levelTv;
-
-    TextView clock;
+    TextView clockTv;
+    TextView roskisTv;
 
     int maxTime = 60;
 
-    private void showLevelScore(int l, int s)
-    {
-        score.setText("ROSKIS: "+String.format("%03d", cont));
-        levelTv.setText("LEVEL "+String.format("%02d", level));
+    CountDownTimer countDown;
 
+    private void showLevelScore(int l, int s, int r)
+    {
+        scoreTv.setText("SCORE "+String.format("%04d", score));
+        levelTv.setText("LEVEL "+String.format("%02d", level));
+        roskisTv.setText("ROSKIS "+String.format("%03d", (goal - roskis)));
+    }
+
+    private boolean isGoalAchieved()
+    {
+       return (goal <= roskis);
+    }
+
+    private void checkAchievement(){
+        if (isGoalAchieved()) {
+            try {
+                showMessage("LEVEL "+level+" UP!");
+                countDown.cancel();
+                int dif = maxTime - contTime;
+                for (int i=0;i<dif;i++)
+                {
+                    score++;
+                    showLevelScore(level, score, roskis);
+                }
+            } catch (Exception e) {  }
+            levelUp();
+            roskis = 0;
+            showLevelScore(level, score, roskis);
+            startButton.setText("NEXT LEVEL");
+            startButton.setVisibility(View.VISIBLE);
+            gameOver = true;
+        }
     }
 
     @Override
@@ -48,9 +81,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        score = (TextView)  findViewById(R.id.score);
+        scoreTv = (TextView)  findViewById(R.id.score);
         levelTv = (TextView)  findViewById(R.id.level);
-        clock = (TextView)  findViewById(R.id.textClock);
+        clockTv = (TextView)  findViewById(R.id.textClock);
+        roskisTv = (TextView)  findViewById(R.id.roskis);
 
         buttonF1C1 = (ImageButton) findViewById(R.id.imageButtonF1C1);
         buttonF1C2 = (ImageButton) findViewById(R.id.imageButtonF1C2);
@@ -70,9 +104,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!gameOver) {
-                    cont++;
-                    showLevelScore(level, cont);
+                    roskis++;
+                    score++;
+                    showLevelScore(level, score, roskis);
                     buttonF1C1.setVisibility(View.INVISIBLE);
+                    checkAchievement();
                     numButtons--;
                     if (numButtons == 0)
                         choseButtons();
@@ -83,10 +119,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!gameOver) {
-                    cont++;
-                    showLevelScore(level, cont);
+                    roskis++;
+                    score++;
+                    showLevelScore(level, score, roskis);
                     buttonF1C2.setVisibility(View.INVISIBLE);
                     numButtons--;
+                    checkAchievement();
                     if (numButtons == 0)
                         choseButtons();
                 }
@@ -96,10 +134,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!gameOver) {
-                    cont++;
-                    showLevelScore(level, cont);
+                    roskis++;
+                    score++;
+                    showLevelScore(level, score, roskis);
                     buttonF1C3.setVisibility(View.INVISIBLE);
                     numButtons--;
+                    checkAchievement();
                     if (numButtons == 0)
                         choseButtons();
                 }
@@ -110,10 +150,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!gameOver) {
-                    cont++;
-                    showLevelScore(level, cont);
+                    roskis++;
+                    score++;
+                    showLevelScore(level, score, roskis);
                     buttonF2C1.setVisibility(View.INVISIBLE);
                     numButtons--;
+                    checkAchievement();
                     if (numButtons == 0)
                         choseButtons();
                 }
@@ -123,10 +165,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!gameOver) {
-                    cont++;
-                    showLevelScore(level, cont);
+                    roskis++;
+                    score++;
+                    showLevelScore(level, score, roskis);
                     buttonF2C2.setVisibility(View.INVISIBLE);
                     numButtons--;
+                    checkAchievement();
                     if (numButtons == 0)
                         choseButtons();
                 }
@@ -136,10 +180,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!gameOver) {
-                    cont++;
-                    showLevelScore(level, cont);
+                    roskis++;
+                    score++;
+                    showLevelScore(level, score, roskis);
                     buttonF2C3.setVisibility(View.INVISIBLE);
                     numButtons--;
+                    checkAchievement();
                     if (numButtons == 0)
                         choseButtons();
                 }
@@ -150,10 +196,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!gameOver) {
-                    cont++;
-                    showLevelScore(level, cont);
+                    roskis++;
+                    score++;
+                    showLevelScore(level, score, roskis);
                     buttonF3C1.setVisibility(View.INVISIBLE);
                     numButtons--;
+                    checkAchievement();
                     if (numButtons == 0)
                         choseButtons();
                 }
@@ -164,10 +212,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!gameOver) {
-                    cont++;
-                    showLevelScore(level, cont);
+                    roskis++;
+                    score++;
+                    showLevelScore(level, score, roskis);
                     buttonF3C2.setVisibility(View.INVISIBLE);
                     numButtons--;
+                    checkAchievement();
                     if (numButtons == 0)
                         choseButtons();
                 }
@@ -177,10 +227,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!gameOver) {
-                    cont++;
-                    showLevelScore(level, cont);
+                    roskis++;
+                    score++;
+                    showLevelScore(level, score, roskis);
                     buttonF3C3.setVisibility(View.INVISIBLE);
                     numButtons--;
+                    checkAchievement();
                     if (numButtons == 0)
                         choseButtons();
                 }
@@ -192,8 +244,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                cont = 0;
+                if (level == 1)
+                {
+                    score = 0;
+                    goal = initGoal;
+                }
+
+                roskis = 0;
                 gameOver = false;
+                contTime = 0;
 
                 showMessage("LET'S GO!");
 
@@ -212,10 +271,9 @@ public class MainActivity extends AppCompatActivity {
 
                 startButton.setVisibility(View.INVISIBLE);
 
-                showLevelScore(level, cont);
+                showLevelScore(level, score, roskis);
 
-                reverseTimer(getMaxTime(),clock);
-                numButtons = 0;
+                reverseTimer(getMaxTime(),clockTv);
                 choseButtons();
             }
         });
@@ -298,55 +356,49 @@ public class MainActivity extends AppCompatActivity {
     private void gameOver()
     {
         showMessage("GAME OVER!");
-        clock.setText("GAME OVER");
+        clockTv.setText("TIME UP");
         gameOver = true;
+        startButton.setText("START");
+        startButton.setVisibility(View.VISIBLE);
+        level = 1;
+
     }
 
     private int  getGoal()
     {
-        return level * goal;
+        return goal;
     }
 
     private int getMaxTime()
     {
         return maxTime;
     }
+
     private void levelUp()
     {
-        showMessage("LEVEL UP!");
-        if (level<9)
-        {
-            level++;
-            if (numBtn<5)
-                numBtn++;
+        goal+=septGoal;
+        level++;
+        if ((level%2==0)&&(numBtn<5))
+            numBtn++;
 
-        }
-
-        showLevelScore(level,cont);
-        reverseTimer(getMaxTime(),clock);
-        numButtons = 0;
+        showLevelScore(level, score, roskis);
         choseButtons();
     }
 
     public void reverseTimer(int Seconds,final TextView tv){
 
-        new CountDownTimer(Seconds* 1000+1000, 1000) {
-
+        countDown =new CountDownTimer(Seconds* 1000+1000, 1000) {
             public void onTick(long millisUntilFinished) {
                 int seconds = (int) (millisUntilFinished / 1000);
                 int minutes = seconds / 60;
                 seconds = seconds % 60;
-                tv.setText("TIME : " + String.format("%02d", minutes)
+                tv.setText("TIME " + String.format("%02d", minutes)
                         + ":" + String.format("%02d", seconds));
+                contTime++;
             }
 
             public void onFinish() {
-                if (cont >= getGoal()){
-                    levelUp();
-                }
-                else{
                     gameOver();
-                }
             }
         }.start();
     }
