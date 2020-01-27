@@ -73,7 +73,9 @@ public class MainActivity extends AppCompatActivity {
             showLevelScore(level, score, roskis);
             startButton.setText("NEXT LEVEL");
             startButton.setVisibility(View.VISIBLE);
+            clockTv.setText("TIME 00:00");
             gameOver = true;
+            showRoskis();
         }
     }
 
@@ -81,6 +83,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
 
         scoreTv = (TextView)  findViewById(R.id.score);
         levelTv = (TextView)  findViewById(R.id.level);
@@ -100,6 +104,8 @@ public class MainActivity extends AppCompatActivity {
         buttonF3C3 = (ImageButton) findViewById(R.id.imageButtonF3C3);
 
         startButton = (Button) findViewById (R.id.button);
+
+        gameOver = true;
 
         buttonF1C1.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -258,18 +264,7 @@ public class MainActivity extends AppCompatActivity {
 
                 showMessage("LET'S GO!");
 
-                buttonF1C1.setVisibility(View.INVISIBLE);
-                buttonF1C2.setVisibility(View.INVISIBLE);
-                buttonF1C3.setVisibility(View.INVISIBLE);
-
-                buttonF2C1.setVisibility(View.INVISIBLE);
-                buttonF2C2.setVisibility(View.INVISIBLE);
-                buttonF2C3.setVisibility(View.INVISIBLE);
-
-                buttonF3C1.setVisibility(View.INVISIBLE);
-                buttonF3C2.setVisibility(View.INVISIBLE);
-                buttonF3C3.setVisibility(View.INVISIBLE);
-
+                hideRoskis();
 
                 startButton.setVisibility(View.INVISIBLE);
 
@@ -281,6 +276,34 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void hideRoskis()
+    {
+        buttonF1C1.setVisibility(View.INVISIBLE);
+        buttonF1C2.setVisibility(View.INVISIBLE);
+        buttonF1C3.setVisibility(View.INVISIBLE);
+
+        buttonF2C1.setVisibility(View.INVISIBLE);
+        buttonF2C2.setVisibility(View.INVISIBLE);
+        buttonF2C3.setVisibility(View.INVISIBLE);
+
+        buttonF3C1.setVisibility(View.INVISIBLE);
+        buttonF3C2.setVisibility(View.INVISIBLE);
+        buttonF3C3.setVisibility(View.INVISIBLE);
+    }
+    private void showRoskis()
+    {
+        buttonF1C1.setVisibility(View.VISIBLE);
+        buttonF1C2.setVisibility(View.VISIBLE);
+        buttonF1C3.setVisibility(View.VISIBLE);
+
+        buttonF2C1.setVisibility(View.VISIBLE);
+        buttonF2C2.setVisibility(View.VISIBLE);
+        buttonF2C3.setVisibility(View.VISIBLE);
+
+        buttonF3C1.setVisibility(View.VISIBLE);
+        buttonF3C2.setVisibility(View.VISIBLE);
+        buttonF3C3.setVisibility(View.VISIBLE);
+    }
     private void showMessage(String text){
         Toast toast = Toast.makeText(MainActivity.this, text, Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER, 0, 0);
@@ -363,6 +386,7 @@ public class MainActivity extends AppCompatActivity {
         startButton.setText("START");
         startButton.setVisibility(View.VISIBLE);
         level = 1;
+        showRoskis();
 
     }
 
@@ -380,11 +404,8 @@ public class MainActivity extends AppCompatActivity {
     {
         goal+=septGoal;
         level++;
-        if ((level%2==0)&&(numBtn<5))
+        if ((level%4==0)&&(numBtn<5))
             numBtn++;
-
-        showLevelScore(level, score, roskis);
-        choseButtons();
     }
 
     public void reverseTimer(int Seconds,final TextView tv){
