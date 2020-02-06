@@ -110,6 +110,8 @@ public class MainActivity extends AppCompatActivity {
         buttonF1C1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                v.getId();
+                v.getHandler();
                 if (!gameOver) {
                     roskis++;
                     score++;
