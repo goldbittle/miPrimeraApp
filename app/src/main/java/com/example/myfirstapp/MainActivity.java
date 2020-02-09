@@ -7,6 +7,7 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -16,13 +17,13 @@ import android.widget.Toast;
 import java.util.Random;
 import java.util.Timer;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     ImageButton buttonF1C1, buttonF1C2,buttonF1C3;
     ImageButton buttonF2C1, buttonF2C2,buttonF2C3;
     ImageButton buttonF3C1, buttonF3C2,buttonF3C3;
 
-    private final int initGoal = 100;
+    private final int initGoal = 50;
     private final int septGoal = 10;
     private final int initNumBtn = 3;
 
@@ -40,9 +41,23 @@ public class MainActivity extends AppCompatActivity {
     TextView clockTv;
     TextView roskisTv;
 
-    int maxTime = 60;
+    int maxTime = 35;
 
     CountDownTimer countDown;
+
+    @Override
+    public void onClick(View v) {
+        if (!gameOver) {
+            roskis++;
+            score++;
+            showLevelScore(level, score, roskis);
+            findViewById(v.getId()).setVisibility(View.INVISIBLE);
+            checkAchievement();
+            numButtons--;
+            if (numButtons == 0)
+                choseButtons();
+        }
+    }
 
     private void showLevelScore(int l, int s, int r)
     {
@@ -86,11 +101,14 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.ic_launcher);
 
+
+        //TextViews - Indicators
         scoreTv = (TextView)  findViewById(R.id.score);
         levelTv = (TextView)  findViewById(R.id.level);
         clockTv = (TextView)  findViewById(R.id.textClock);
         roskisTv = (TextView)  findViewById(R.id.roskis);
 
+        //ImageButtons - Roskis
         buttonF1C1 = (ImageButton) findViewById(R.id.imageButtonF1C1);
         buttonF1C2 = (ImageButton) findViewById(R.id.imageButtonF1C2);
         buttonF1C3 = (ImageButton) findViewById(R.id.imageButtonF1C3);
@@ -103,152 +121,25 @@ public class MainActivity extends AppCompatActivity {
         buttonF3C2 = (ImageButton) findViewById(R.id.imageButtonF3C2);
         buttonF3C3 = (ImageButton) findViewById(R.id.imageButtonF3C3);
 
+        //Button - Start
         startButton = (Button) findViewById (R.id.button);
 
         gameOver = true;
 
-        buttonF1C1.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                v.getId();
-                v.getHandler();
-                if (!gameOver) {
-                    roskis++;
-                    score++;
-                    showLevelScore(level, score, roskis);
-                    buttonF1C1.setVisibility(View.INVISIBLE);
-                    checkAchievement();
-                    numButtons--;
-                    if (numButtons == 0)
-                        choseButtons();
-                }
-            }
-        });
-        buttonF1C2.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                if (!gameOver) {
-                    roskis++;
-                    score++;
-                    showLevelScore(level, score, roskis);
-                    buttonF1C2.setVisibility(View.INVISIBLE);
-                    numButtons--;
-                    checkAchievement();
-                    if (numButtons == 0)
-                        choseButtons();
-                }
-            }
-        });
-        buttonF1C3.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                if (!gameOver) {
-                    roskis++;
-                    score++;
-                    showLevelScore(level, score, roskis);
-                    buttonF1C3.setVisibility(View.INVISIBLE);
-                    numButtons--;
-                    checkAchievement();
-                    if (numButtons == 0)
-                        choseButtons();
-                }
-            }
-        });
+        //Roski - Listeners
+        buttonF1C1.setOnClickListener(this);
+        buttonF1C2.setOnClickListener(this);
+        buttonF1C3.setOnClickListener(this);
 
-        buttonF2C1.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                if (!gameOver) {
-                    roskis++;
-                    score++;
-                    showLevelScore(level, score, roskis);
-                    buttonF2C1.setVisibility(View.INVISIBLE);
-                    numButtons--;
-                    checkAchievement();
-                    if (numButtons == 0)
-                        choseButtons();
-                }
-            }
-        });
-        buttonF2C2.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                if (!gameOver) {
-                    roskis++;
-                    score++;
-                    showLevelScore(level, score, roskis);
-                    buttonF2C2.setVisibility(View.INVISIBLE);
-                    numButtons--;
-                    checkAchievement();
-                    if (numButtons == 0)
-                        choseButtons();
-                }
-            }
-        });
-        buttonF2C3.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                if (!gameOver) {
-                    roskis++;
-                    score++;
-                    showLevelScore(level, score, roskis);
-                    buttonF2C3.setVisibility(View.INVISIBLE);
-                    numButtons--;
-                    checkAchievement();
-                    if (numButtons == 0)
-                        choseButtons();
-                }
-            }
-        });
+        buttonF2C1.setOnClickListener(this);
+        buttonF2C2.setOnClickListener(this);
+        buttonF2C3.setOnClickListener(this);
 
-        buttonF3C1.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                if (!gameOver) {
-                    roskis++;
-                    score++;
-                    showLevelScore(level, score, roskis);
-                    buttonF3C1.setVisibility(View.INVISIBLE);
-                    numButtons--;
-                    checkAchievement();
-                    if (numButtons == 0)
-                        choseButtons();
-                }
-            }
-        });
+        buttonF3C1.setOnClickListener(this);
+        buttonF3C2.setOnClickListener(this);
+        buttonF3C3.setOnClickListener(this);
 
-        buttonF3C2.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                if (!gameOver) {
-                    roskis++;
-                    score++;
-                    showLevelScore(level, score, roskis);
-                    buttonF3C2.setVisibility(View.INVISIBLE);
-                    numButtons--;
-                    checkAchievement();
-                    if (numButtons == 0)
-                        choseButtons();
-                }
-            }
-        });
-        buttonF3C3.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                if (!gameOver) {
-                    roskis++;
-                    score++;
-                    showLevelScore(level, score, roskis);
-                    buttonF3C3.setVisibility(View.INVISIBLE);
-                    numButtons--;
-                    checkAchievement();
-                    if (numButtons == 0)
-                        choseButtons();
-                }
-            }
-        });
-
-
+        //Start Button Listener
         startButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -277,7 +168,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     private void hideRoskis()
     {
         buttonF1C1.setVisibility(View.INVISIBLE);
@@ -307,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
         buttonF3C3.setVisibility(View.VISIBLE);
     }
     private void showMessage(String text){
-        Toast toast = Toast.makeText(MainActivity.this, text, Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(MainActivity.this, text, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
 
@@ -406,7 +296,7 @@ public class MainActivity extends AppCompatActivity {
     {
         goal+=septGoal;
         level++;
-        if ((level%4==0)&&(numBtn<5))
+        if ((level%5==0)&&(numBtn<5))
             numBtn++;
     }
 
