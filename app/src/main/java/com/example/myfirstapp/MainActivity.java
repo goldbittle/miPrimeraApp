@@ -11,17 +11,65 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Random;
 import java.util.Timer;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnTouchListener, View.OnClickListener{
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        switch (event.getAction())
+        {
+            case MotionEvent.ACTION_DOWN:
+            case MotionEvent.ACTION_POINTER_DOWN:
+                v.setPressed(true);
+                dedos++;
+                break;
+            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_POINTER_UP:
+                v.setPressed(false);
+                if (!gameOver) {
+                    roskis++;
+                    switch (dedos)
+                    {
+                        case 1:
+                            score++;
+                            break;
+                        case 2:
+                            score++;
+                            score+=5;
+                            break;
+                        case 3:
+                            score+=10;
+                            break;
+                        case 4:
+                            score+=20;
+                            break;
+                        case 5:
+                            score+=30;
+                            break;
+                    }
+                    showLevelScore(level, score, roskis);
+                    findViewById(v.getId()).setVisibility(View.INVISIBLE);
+                    checkAchievement();
+                    numButtons--;
+                    if (numButtons == 0)
+                        choseButtons();
+                }
+                dedos--;
+                break;
+        }
+        return true;
+    }
 
     ImageButton buttonF1C1, buttonF1C2,buttonF1C3;
     ImageButton buttonF2C1, buttonF2C2,buttonF2C3;
     ImageButton buttonF3C1, buttonF3C2,buttonF3C3;
+
+    //LinearLayout layoutRoskis;
 
     private final int initGoal = 50;
     private final int septGoal = 10;
@@ -43,6 +91,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     int maxTime = 35;
 
+    int dedos = 0;
+
     CountDownTimer countDown;
 
     @Override
@@ -58,6 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 choseButtons();
         }
     }
+
 
     private void showLevelScore(int l, int s, int r)
     {
@@ -102,11 +153,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getSupportActionBar().setIcon(R.mipmap.ic_launcher);
 
 
+        //layoutRoskis = (LinearLayout) findViewById(R.id.roskisLL);
+
         //TextViews - Indicators
         scoreTv = (TextView)  findViewById(R.id.score);
         levelTv = (TextView)  findViewById(R.id.level);
         clockTv = (TextView)  findViewById(R.id.textClock);
         roskisTv = (TextView)  findViewById(R.id.roskis);
+
 
         //ImageButtons - Roskis
         buttonF1C1 = (ImageButton) findViewById(R.id.imageButtonF1C1);
@@ -127,6 +181,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         gameOver = true;
 
         //Roski - Listeners
+
+        //layoutRoskis.setOnTouchListener(this);
+
+        buttonF1C1.setOnTouchListener(this);
+        buttonF1C2.setOnTouchListener(this);
+        buttonF1C3.setOnTouchListener(this);
+
+        buttonF2C1.setOnTouchListener(this);
+        buttonF2C2.setOnTouchListener(this);
+        buttonF2C3.setOnTouchListener(this);
+
+        buttonF3C1.setOnTouchListener(this);
+        buttonF3C2.setOnTouchListener(this);
+        buttonF3C3.setOnTouchListener(this);
+
+
+/*
         buttonF1C1.setOnClickListener(this);
         buttonF1C2.setOnClickListener(this);
         buttonF1C3.setOnClickListener(this);
@@ -138,7 +209,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonF3C1.setOnClickListener(this);
         buttonF3C2.setOnClickListener(this);
         buttonF3C3.setOnClickListener(this);
-
+*/
         //Start Button Listener
         startButton.setOnClickListener(new View.OnClickListener(){
             @Override
