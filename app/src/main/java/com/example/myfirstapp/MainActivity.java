@@ -4,32 +4,26 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
-import android.os.SystemClock;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Random;
-import java.util.Timer;
 
-public class MainActivity extends AppCompatActivity implements View.OnTouchListener, View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnTouchListener{
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         switch (event.getAction())
         {
             case MotionEvent.ACTION_DOWN:
-            case MotionEvent.ACTION_POINTER_DOWN:
                 v.setPressed(true);
                 dedos++;
                 break;
             case MotionEvent.ACTION_UP:
-            case MotionEvent.ACTION_POINTER_UP:
                 v.setPressed(false);
                 if (!gameOver) {
                     roskis++;
@@ -41,15 +35,19 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                         case 2:
                             score++;
                             score+=5;
+                            showCustomMessage("+5");
                             break;
                         case 3:
                             score+=10;
+                            showCustomMessage("+10");
                             break;
                         case 4:
                             score+=20;
+                            showCustomMessage("+20");
                             break;
                         case 5:
                             score+=30;
+                            showCustomMessage("+30");
                             break;
                     }
                     showLevelScore(level, score, roskis);
@@ -68,8 +66,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     ImageButton buttonF1C1, buttonF1C2,buttonF1C3;
     ImageButton buttonF2C1, buttonF2C2,buttonF2C3;
     ImageButton buttonF3C1, buttonF3C2,buttonF3C3;
-
-    //LinearLayout layoutRoskis;
 
     private final int initGoal = 50;
     private final int septGoal = 10;
@@ -95,20 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     CountDownTimer countDown;
 
-    @Override
-    public void onClick(View v) {
-        if (!gameOver) {
-            roskis++;
-            score++;
-            showLevelScore(level, score, roskis);
-            findViewById(v.getId()).setVisibility(View.INVISIBLE);
-            checkAchievement();
-            numButtons--;
-            if (numButtons == 0)
-                choseButtons();
-        }
-    }
-
+    Toast toastCustom;
 
     private void showLevelScore(int l, int s, int r)
     {
@@ -152,15 +135,15 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.ic_launcher);
 
+        //Toast Custom
+        toastCustom = new Toast(this);
 
-        //layoutRoskis = (LinearLayout) findViewById(R.id.roskisLL);
 
         //TextViews - Indicators
         scoreTv = (TextView)  findViewById(R.id.score);
         levelTv = (TextView)  findViewById(R.id.level);
         clockTv = (TextView)  findViewById(R.id.textClock);
         roskisTv = (TextView)  findViewById(R.id.roskis);
-
 
         //ImageButtons - Roskis
         buttonF1C1 = (ImageButton) findViewById(R.id.imageButtonF1C1);
@@ -182,8 +165,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         //Roski - Listeners
 
-        //layoutRoskis.setOnTouchListener(this);
-
         buttonF1C1.setOnTouchListener(this);
         buttonF1C2.setOnTouchListener(this);
         buttonF1C3.setOnTouchListener(this);
@@ -196,20 +177,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         buttonF3C2.setOnTouchListener(this);
         buttonF3C3.setOnTouchListener(this);
 
-
-/*
-        buttonF1C1.setOnClickListener(this);
-        buttonF1C2.setOnClickListener(this);
-        buttonF1C3.setOnClickListener(this);
-
-        buttonF2C1.setOnClickListener(this);
-        buttonF2C2.setOnClickListener(this);
-        buttonF2C3.setOnClickListener(this);
-
-        buttonF3C1.setOnClickListener(this);
-        buttonF3C2.setOnClickListener(this);
-        buttonF3C3.setOnClickListener(this);
-*/
         //Start Button Listener
         startButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -271,8 +238,19 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         Toast toast = Toast.makeText(MainActivity.this, text, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
-
     }
+
+    private void showCustomMessage(String text){
+        View toast_layout = getLayoutInflater().inflate(R.layout.custom_toast, null);
+        toastCustom.setView(toast_layout);
+
+        TextView textView = (TextView) toast_layout.findViewById(R.id.toastMessage);
+        textView.setText(text);
+        toastCustom.setGravity(Gravity.TOP|Gravity.RIGHT, 0, 0);
+        toastCustom.setDuration(Toast.LENGTH_SHORT);
+        toastCustom.show();
+    }
+
     protected void choseButtons(){
         numButtons= new Random().nextInt(numBtn) + 1;
         int random2 = 0;
