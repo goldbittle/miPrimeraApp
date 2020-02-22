@@ -15,6 +15,12 @@ import android.widget.Toast;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener{
+
+    static final int SCORE_PLUS_5 = 1;
+    static final int SCORE_PLUS_10 = 2;
+    static final int SCORE_PLUS_20 = 3;
+    static final int SCORE_PLUS_30 = 4;
+
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         switch (event.getAction())
@@ -35,19 +41,19 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                         case 2:
                             score++;
                             score+=5;
-                            showCustomMessage("+5");
+                            showCustomMessage("+5",SCORE_PLUS_5);
                             break;
                         case 3:
                             score+=10;
-                            showCustomMessage("+10");
+                            showCustomMessage("+10",SCORE_PLUS_10);
                             break;
                         case 4:
                             score+=20;
-                            showCustomMessage("+20");
+                            showCustomMessage("+20",SCORE_PLUS_20);
                             break;
                         case 5:
                             score+=30;
-                            showCustomMessage("+30");
+                            showCustomMessage("+30",SCORE_PLUS_30);
                             break;
                     }
                     showLevelScore(level, score, roskis);
@@ -91,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     CountDownTimer countDown;
 
-    Toast toastCustom;
+    Toast toastCustom = null;
 
     private void showLevelScore(int l, int s, int r)
     {
@@ -136,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         getSupportActionBar().setIcon(R.mipmap.ic_launcher);
 
         //Toast Custom
-        toastCustom = new Toast(this);
+//        toastCustom = new Toast(this);
 
 
         //TextViews - Indicators
@@ -240,8 +246,31 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         toast.show();
     }
 
-    private void showCustomMessage(String text){
-        View toast_layout = getLayoutInflater().inflate(R.layout.custom_toast, null);
+    private void showCustomMessage(String text, int type){
+        if (toastCustom!=null)
+            toastCustom.setDuration(0);
+        toastCustom = new Toast(this);
+        View toast_layout;
+
+        switch (type){
+            case SCORE_PLUS_5:
+                toast_layout = getLayoutInflater().inflate(R.layout.custom_toast_yellow, null);
+                break;
+            case SCORE_PLUS_10:
+                toast_layout = getLayoutInflater().inflate(R.layout.custom_toast_orange, null);
+                break;
+            case SCORE_PLUS_20:
+                toast_layout = getLayoutInflater().inflate(R.layout.custom_toast_red, null);
+                break;
+            case SCORE_PLUS_30:
+                toast_layout = getLayoutInflater().inflate(R.layout.custom_toast_green, null);
+                break;
+            default:
+                toast_layout = getLayoutInflater().inflate(R.layout.custom_toast, null);
+                break;
+        }
+
+
         toastCustom.setView(toast_layout);
 
         TextView textView = (TextView) toast_layout.findViewById(R.id.toastMessage);
