@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<declare-styleable name="roski">
+    <attr name="state_regular" format="boolean" />
+    <attr name="state_eated" format="boolean" />
+    <attr name="state_two_eated" format="boolean" />
+    <attr name="state_three_eated" format="boolean" />
+    <attr name="state_four_eated" format="boolean" />
+    <attr name="state_five_eated" format="boolean" />
+</declare-styleable>
+</resources>

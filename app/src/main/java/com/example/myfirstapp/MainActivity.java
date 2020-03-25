@@ -16,6 +16,7 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener{
 
+    static final int GENERIC_MESSAGE = 0;
     static final int SCORE_PLUS_5 = 1;
     static final int SCORE_PLUS_10 = 2;
     static final int SCORE_PLUS_20 = 3;
@@ -23,13 +24,25 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+
         switch (event.getAction())
         {
             case MotionEvent.ACTION_DOWN:
+
+                if (findViewById(v.getId()) instanceof RoskiImageButton) {
+                    //if(dedos>0)
+                    //    ((RoskiImageButton) findViewById(v.getId())).set2Eated();
+                    //else
+                        ((RoskiImageButton) findViewById(v.getId())).setEated();
+                }
+
                 v.setPressed(true);
                 dedos++;
                 break;
             case MotionEvent.ACTION_UP:
+                if (findViewById(v.getId()) instanceof RoskiImageButton) {
+                    ((RoskiImageButton) findViewById(v.getId())).setRegular();
+                }
                 v.setPressed(false);
                 if (!gameOver) {
                     roskis++;
@@ -39,11 +52,15 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                             score++;
                             break;
                         case 2:
+                            if (findViewById(v.getId()) instanceof RoskiImageButton)
+                                ((RoskiImageButton) findViewById(v.getId())).set2Eated();
                             score++;
                             score+=5;
                             showCustomMessage("+5",SCORE_PLUS_5);
                             break;
                         case 3:
+                            if (findViewById(v.getId()) instanceof RoskiImageButton)
+                                ((RoskiImageButton) findViewById(v.getId())).set3Eated();
                             score+=10;
                             showCustomMessage("+10",SCORE_PLUS_10);
                             break;
@@ -58,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     }
                     showLevelScore(level, score, roskis);
                     findViewById(v.getId()).setVisibility(View.INVISIBLE);
+
                     checkAchievement();
                     numButtons--;
                     if (numButtons == 0)
@@ -69,7 +87,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         return true;
     }
 
-    ImageButton buttonF1C1, buttonF1C2,buttonF1C3;
+    //ImageButton buttonF1C1, buttonF1C2,buttonF1C3;
+    RoskiImageButton buttonF1C1, buttonF1C2, buttonF1C3;;
     ImageButton buttonF2C1, buttonF2C2,buttonF2C3;
     ImageButton buttonF3C1, buttonF3C2,buttonF3C3;
 
@@ -152,9 +171,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         roskisTv = (TextView)  findViewById(R.id.roskis);
 
         //ImageButtons - Roskis
-        buttonF1C1 = (ImageButton) findViewById(R.id.imageButtonF1C1);
-        buttonF1C2 = (ImageButton) findViewById(R.id.imageButtonF1C2);
-        buttonF1C3 = (ImageButton) findViewById(R.id.imageButtonF1C3);
+        buttonF1C1 = (RoskiImageButton) findViewById(R.id.imageButtonF1C1);
+        buttonF1C1.setRegular();
+        buttonF1C2 = (RoskiImageButton) findViewById(R.id.imageButtonF1C2);
+        buttonF1C2.setRegular();
+        buttonF1C3 = (RoskiImageButton)  findViewById(R.id.imageButtonF1C3);
+        buttonF1C3.setRegular();
 
         buttonF2C1 = (ImageButton) findViewById(R.id.imageButtonF2C1);
         buttonF2C2 = (ImageButton) findViewById(R.id.imageButtonF2C2);
@@ -241,14 +263,21 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         buttonF3C3.setVisibility(View.VISIBLE);
     }
     private void showMessage(String text){
+/*
         Toast toast = Toast.makeText(MainActivity.this, text, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
+
+ */
+        showCustomMessage(text,GENERIC_MESSAGE);
+
     }
 
     private void showCustomMessage(String text, int type){
-        if (toastCustom!=null)
-            toastCustom.setDuration(0);
+        if (toastCustom!=null) {
+            toastCustom.cancel();
+            //toastCustom.setDuration(0);
+        }
         toastCustom = new Toast(this);
         View toast_layout;
 
@@ -275,7 +304,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         TextView textView = (TextView) toast_layout.findViewById(R.id.toastMessage);
         textView.setText(text);
-        toastCustom.setGravity(Gravity.TOP|Gravity.RIGHT, 0, 0);
+        if (type==GENERIC_MESSAGE)
+            toastCustom.setGravity(Gravity.CENTER, 0, 0);
+        else
+            toastCustom.setGravity(Gravity.TOP|Gravity.RIGHT, 0, 0);
         toastCustom.setDuration(Toast.LENGTH_SHORT);
         toastCustom.show();
     }

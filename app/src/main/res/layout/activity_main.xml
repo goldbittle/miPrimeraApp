@@ -40,30 +40,30 @@
         android:layout_weight="1"
         android:gravity="center">
 
-        <ImageButton
+        <com.example.myfirstapp.RoskiImageButton
             android:id="@+id/imageButtonF1C1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
 
 
-            android:background="@drawable/anima_boton" />
+            android:background="@drawable/roski_button" />
 
-        <ImageButton
+        <com.example.myfirstapp.RoskiImageButton
             android:id="@+id/imageButtonF1C2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
 
-            android:background="@drawable/anima_boton" />
+            android:background="@drawable/roski_button" />
 
-        <ImageButton
+        <com.example.myfirstapp.RoskiImageButton
             android:id="@+id/imageButtonF1C3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
 
-            android:background="@drawable/anima_boton" />
+            android:background="@drawable/roski_button" />
     </LinearLayout>
 
     <LinearLayout
