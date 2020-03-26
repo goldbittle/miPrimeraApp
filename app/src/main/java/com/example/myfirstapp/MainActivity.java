@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener{
@@ -22,28 +23,42 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     static final int SCORE_PLUS_20 = 3;
     static final int SCORE_PLUS_30 = 4;
 
+    //ArrayList<RoskiImageButton> roskisList = new ArrayList<RoskiImageButton>();
+
     @Override
     public boolean onTouch(View v, MotionEvent event) {
 
         switch (event.getAction())
         {
             case MotionEvent.ACTION_DOWN:
+                ((RoskiImageButton) findViewById(v.getId())).setEated();
+/*
+                roskisList.add((RoskiImageButton) findViewById(v.getId()));
 
-                if (findViewById(v.getId()) instanceof RoskiImageButton) {
-                    //if(dedos>0)
-                    //    ((RoskiImageButton) findViewById(v.getId())).set2Eated();
-                    //else
-                        ((RoskiImageButton) findViewById(v.getId())).setEated();
+                switch(dedos){
+                    case 0:
+                        for (RoskiImageButton roskiItem: roskisList)
+                            roskiItem.setEated();
+                        break;
+                    case 1:
+                        for (RoskiImageButton roskiItem: roskisList)
+                            roskiItem.set2Eated();
+                        break;
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                        for (RoskiImageButton roskiItem: roskisList)
+                            roskiItem.set3Eated();
+                        break;
                 }
-
+*/
                 v.setPressed(true);
                 dedos++;
                 break;
             case MotionEvent.ACTION_UP:
-                if (findViewById(v.getId()) instanceof RoskiImageButton) {
-                    ((RoskiImageButton) findViewById(v.getId())).setRegular();
-                }
                 v.setPressed(false);
+                ((RoskiImageButton) findViewById(v.getId())).setRegular();
                 if (!gameOver) {
                     roskis++;
                     switch (dedos)
@@ -52,15 +67,11 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                             score++;
                             break;
                         case 2:
-                            if (findViewById(v.getId()) instanceof RoskiImageButton)
-                                ((RoskiImageButton) findViewById(v.getId())).set2Eated();
                             score++;
                             score+=5;
                             showCustomMessage("+5",SCORE_PLUS_5);
                             break;
                         case 3:
-                            if (findViewById(v.getId()) instanceof RoskiImageButton)
-                                ((RoskiImageButton) findViewById(v.getId())).set3Eated();
                             score+=10;
                             showCustomMessage("+10",SCORE_PLUS_10);
                             break;
@@ -73,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                             showCustomMessage("+30",SCORE_PLUS_30);
                             break;
                     }
+
                     showLevelScore(level, score, roskis);
                     findViewById(v.getId()).setVisibility(View.INVISIBLE);
 
@@ -87,10 +99,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         return true;
     }
 
-    //ImageButton buttonF1C1, buttonF1C2,buttonF1C3;
     RoskiImageButton buttonF1C1, buttonF1C2, buttonF1C3;;
-    ImageButton buttonF2C1, buttonF2C2,buttonF2C3;
-    ImageButton buttonF3C1, buttonF3C2,buttonF3C3;
+    RoskiImageButton buttonF2C1, buttonF2C2,buttonF2C3;
+    RoskiImageButton buttonF3C1, buttonF3C2,buttonF3C3;
 
     private final int initGoal = 50;
     private final int septGoal = 10;
@@ -172,19 +183,25 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         //ImageButtons - Roskis
         buttonF1C1 = (RoskiImageButton) findViewById(R.id.imageButtonF1C1);
-        buttonF1C1.setRegular();
         buttonF1C2 = (RoskiImageButton) findViewById(R.id.imageButtonF1C2);
-        buttonF1C2.setRegular();
         buttonF1C3 = (RoskiImageButton)  findViewById(R.id.imageButtonF1C3);
+        buttonF1C1.setRegular();
+        buttonF1C2.setRegular();
         buttonF1C3.setRegular();
 
-        buttonF2C1 = (ImageButton) findViewById(R.id.imageButtonF2C1);
-        buttonF2C2 = (ImageButton) findViewById(R.id.imageButtonF2C2);
-        buttonF2C3 = (ImageButton) findViewById(R.id.imageButtonF2C3);
+        buttonF2C1 = (RoskiImageButton) findViewById(R.id.imageButtonF2C1);
+        buttonF2C2 = (RoskiImageButton) findViewById(R.id.imageButtonF2C2);
+        buttonF2C3 = (RoskiImageButton) findViewById(R.id.imageButtonF2C3);
+        buttonF2C1.setRegular();
+        buttonF2C2.setRegular();
+        buttonF2C3.setRegular();
 
-        buttonF3C1 = (ImageButton) findViewById(R.id.imageButtonF3C1);
-        buttonF3C2 = (ImageButton) findViewById(R.id.imageButtonF3C2);
-        buttonF3C3 = (ImageButton) findViewById(R.id.imageButtonF3C3);
+        buttonF3C1 = (RoskiImageButton) findViewById(R.id.imageButtonF3C1);
+        buttonF3C2 = (RoskiImageButton) findViewById(R.id.imageButtonF3C2);
+        buttonF3C3 = (RoskiImageButton) findViewById(R.id.imageButtonF3C3);
+        buttonF3C1.setRegular();
+        buttonF3C2.setRegular();
+        buttonF3C3.setRegular();
 
         //Button - Start
         startButton = (Button) findViewById (R.id.button);
