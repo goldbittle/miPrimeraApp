@@ -7,6 +7,9 @@ import android.os.CountDownTimer;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -23,7 +26,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     static final int SCORE_PLUS_20 = 3;
     static final int SCORE_PLUS_30 = 4;
 
-    //ArrayList<RoskiImageButton> roskisList = new ArrayList<RoskiImageButton>();
+    Animation animation = null;
+
+    ArrayList<RoskiImageButton> roskisList = new ArrayList<RoskiImageButton>();
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
@@ -32,33 +37,11 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         {
             case MotionEvent.ACTION_DOWN:
                 ((RoskiImageButton) findViewById(v.getId())).setEated();
-/*
                 roskisList.add((RoskiImageButton) findViewById(v.getId()));
-
-                switch(dedos){
-                    case 0:
-                        for (RoskiImageButton roskiItem: roskisList)
-                            roskiItem.setEated();
-                        break;
-                    case 1:
-                        for (RoskiImageButton roskiItem: roskisList)
-                            roskiItem.set2Eated();
-                        break;
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                        for (RoskiImageButton roskiItem: roskisList)
-                            roskiItem.set3Eated();
-                        break;
-                }
-*/
                 v.setPressed(true);
                 dedos++;
                 break;
             case MotionEvent.ACTION_UP:
-                v.setPressed(false);
-                ((RoskiImageButton) findViewById(v.getId())).setRegular();
                 if (!gameOver) {
                     roskis++;
                     switch (dedos)
@@ -67,33 +50,43 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                             score++;
                             break;
                         case 2:
-                            score++;
                             score+=5;
                             showCustomMessage("+5",SCORE_PLUS_5);
+                            for (RoskiImageButton roskiItem: roskisList)
+                                roskiItem.startAnimation(animation);
                             break;
                         case 3:
                             score+=10;
                             showCustomMessage("+10",SCORE_PLUS_10);
+                            for (RoskiImageButton roskiItem: roskisList)
+                                roskiItem.startAnimation(animation);
+
                             break;
                         case 4:
                             score+=20;
                             showCustomMessage("+20",SCORE_PLUS_20);
+                            for (RoskiImageButton roskiItem: roskisList)
+                                roskiItem.startAnimation(animation);
+
                             break;
                         case 5:
                             score+=30;
                             showCustomMessage("+30",SCORE_PLUS_30);
+                            for (RoskiImageButton roskiItem: roskisList)
+                                roskiItem.startAnimation(animation);
                             break;
                     }
-
                     showLevelScore(level, score, roskis);
                     findViewById(v.getId()).setVisibility(View.INVISIBLE);
-
                     checkAchievement();
                     numButtons--;
                     if (numButtons == 0)
                         choseButtons();
                 }
-                dedos--;
+                ((RoskiImageButton) findViewById(v.getId())).setRegular();
+                v.setPressed(false);
+                dedos=0;
+                roskisList.clear();
                 break;
         }
         return true;
@@ -173,6 +166,15 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         //Toast Custom
 //        toastCustom = new Toast(this);
+
+
+        animation = new AlphaAnimation(1, 0); // Change alpha from fully visible to invisible
+        animation.setDuration(75); // duration - half a second
+        animation.setInterpolator(new LinearInterpolator()); // do not alter animation rate
+        animation.setRepeatCount(1); // Repeat animation infinitely
+        animation.setRepeatMode(Animation.REVERSE); // Reverse animation at the end so the button will fade back in
+
+
 
 
         //TextViews - Indicators
