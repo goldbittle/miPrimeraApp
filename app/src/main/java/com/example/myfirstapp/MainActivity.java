@@ -16,6 +16,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.games.Games;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -407,7 +410,14 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         startButton.setVisibility(View.VISIBLE);
         level = 1;
         showRoskis();
+        uploadScore();
 
+    }
+
+    private void uploadScore()
+    {
+//      Games.getLeaderboardsClient(this, GoogleSignIn.getLastSignedInAccount(this))
+//              .submitScore(getString(R.string.leaderboard_id), score);
     }
 
     private int  getGoal()
