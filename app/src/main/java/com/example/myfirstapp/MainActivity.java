@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -27,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     static final int SCORE_PLUS_30 = 4;
 
     Animation animation = null;
+    Animation animation2 = null;
+    Animation animation3 = null;
 
     ArrayList<RoskiImageButton> roskisList = new ArrayList<RoskiImageButton>();
 
@@ -36,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         switch (event.getAction())
         {
             case MotionEvent.ACTION_DOWN:
-                ((RoskiImageButton) findViewById(v.getId())).setEated();
+                //((RoskiImageButton) findViewById(v.getId())).setEated();
                 roskisList.add((RoskiImageButton) findViewById(v.getId()));
                 v.setPressed(true);
                 dedos++;
@@ -48,32 +51,36 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     {
                         case 1:
                             score++;
+                            for (RoskiImageButton roskiItem: roskisList)
+                                roskiItem.startAnimation(animation2);
                             break;
                         case 2:
                             score+=5;
-                            showCustomMessage("+5",SCORE_PLUS_5);
                             for (RoskiImageButton roskiItem: roskisList)
-                                roskiItem.startAnimation(animation);
+                                roskiItem.startAnimation(animation2);
+                            extraScore.setText("+5");
+                            extraScore.startAnimation(animation3);
                             break;
                         case 3:
                             score+=10;
-                            showCustomMessage("+10",SCORE_PLUS_10);
                             for (RoskiImageButton roskiItem: roskisList)
-                                roskiItem.startAnimation(animation);
-
+                                roskiItem.startAnimation(animation2);
+                            extraScore.setText("+10");
+                            extraScore.startAnimation(animation3);
                             break;
                         case 4:
                             score+=20;
-                            showCustomMessage("+20",SCORE_PLUS_20);
                             for (RoskiImageButton roskiItem: roskisList)
-                                roskiItem.startAnimation(animation);
-
+                                roskiItem.startAnimation(animation2);
+                            extraScore.setText("+20");
+                            extraScore.startAnimation(animation3);
                             break;
                         case 5:
                             score+=30;
-                            showCustomMessage("+30",SCORE_PLUS_30);
                             for (RoskiImageButton roskiItem: roskisList)
-                                roskiItem.startAnimation(animation);
+                                roskiItem.startAnimation(animation2);
+                            extraScore.setText("+30");
+                            extraScore.startAnimation(animation3);
                             break;
                     }
                     showLevelScore(level, score, roskis);
@@ -83,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     if (numButtons == 0)
                         choseButtons();
                 }
-                ((RoskiImageButton) findViewById(v.getId())).setRegular();
+
                 v.setPressed(false);
                 dedos=0;
                 roskisList.clear();
@@ -92,7 +99,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         return true;
     }
 
-    RoskiImageButton buttonF1C1, buttonF1C2, buttonF1C3;;
+    TextView extraScore;
+    RoskiImageButton buttonF1C1, buttonF1C2, buttonF1C3;
     RoskiImageButton buttonF2C1, buttonF2C2,buttonF2C3;
     RoskiImageButton buttonF3C1, buttonF3C2,buttonF3C3;
 
@@ -164,18 +172,16 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.ic_launcher);
 
-        //Toast Custom
-//        toastCustom = new Toast(this);
-
-
         animation = new AlphaAnimation(1, 0); // Change alpha from fully visible to invisible
         animation.setDuration(75); // duration - half a second
         animation.setInterpolator(new LinearInterpolator()); // do not alter animation rate
         animation.setRepeatCount(1); // Repeat animation infinitely
         animation.setRepeatMode(Animation.REVERSE); // Reverse animation at the end so the button will fade back in
 
+        animation2= AnimationUtils.loadAnimation(this, R.anim.bounce);
+        animation3= AnimationUtils.loadAnimation(this, R.anim.fadein);
 
-
+        extraScore = (TextView)  findViewById(R.id.extrascore);
 
         //TextViews - Indicators
         scoreTv = (TextView)  findViewById(R.id.score);
@@ -282,14 +288,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         buttonF3C3.setVisibility(View.VISIBLE);
     }
     private void showMessage(String text){
-/*
-        Toast toast = Toast.makeText(MainActivity.this, text, Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.CENTER, 0, 0);
-        toast.show();
-
- */
         showCustomMessage(text,GENERIC_MESSAGE);
-
     }
 
     private void showCustomMessage(String text, int type){

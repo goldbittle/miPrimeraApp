@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,151 +9,180 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:gravity="center">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/level"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:text="LEVEL 01"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center">
 
-        <TextView
-            android:id="@+id/score"
+            <TextView
+                android:id="@+id/level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="LEVEL 01"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+            <TextView
+                android:id="@+id/score"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="SCORE 0000"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/roskisLL"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <com.example.myfirstapp.RoskiImageButton
+                android:id="@+id/imageButtonF1C1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+
+
+                android:background="@drawable/roski_button" />
+
+            <com.example.myfirstapp.RoskiImageButton
+                android:id="@+id/imageButtonF1C2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+
+                android:background="@drawable/roski_button" />
+
+            <com.example.myfirstapp.RoskiImageButton
+                android:id="@+id/imageButtonF1C3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+
+                android:background="@drawable/roski_button" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <com.example.myfirstapp.RoskiImageButton
+                android:id="@+id/imageButtonF2C1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/roski_button" />
+
+            <com.example.myfirstapp.RoskiImageButton
+                android:id="@+id/imageButtonF2C2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/roski_button" />
+
+            <com.example.myfirstapp.RoskiImageButton
+                android:id="@+id/imageButtonF2C3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/roski_button" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <com.example.myfirstapp.RoskiImageButton
+                android:id="@+id/imageButtonF3C1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:background="@drawable/roski_button" />
+
+            <com.example.myfirstapp.RoskiImageButton
+                android:id="@+id/imageButtonF3C2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:background="@drawable/roski_button" />
+
+            <com.example.myfirstapp.RoskiImageButton
+                android:id="@+id/imageButtonF3C3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:background="@drawable/roski_button" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/textClock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="TIME 00:00"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+            <TextView
+                android:id="@+id/roskis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="ROSKIS 000"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="SCORE 0000"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/roskisLL"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:gravity="center">
-
-        <com.example.myfirstapp.RoskiImageButton
-            android:id="@+id/imageButtonF1C1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-
-
-            android:background="@drawable/roski_button" />
-
-        <com.example.myfirstapp.RoskiImageButton
-            android:id="@+id/imageButtonF1C2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-
-            android:background="@drawable/roski_button" />
-
-        <com.example.myfirstapp.RoskiImageButton
-            android:id="@+id/imageButtonF1C3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-
-            android:background="@drawable/roski_button" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center">
-
-        <com.example.myfirstapp.RoskiImageButton
-            android:id="@+id/imageButtonF2C1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/roski_button" />
-
-        <com.example.myfirstapp.RoskiImageButton
-            android:id="@+id/imageButtonF2C2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/roski_button" />
-
-        <com.example.myfirstapp.RoskiImageButton
-            android:id="@+id/imageButtonF2C3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/roski_button" />
+            android:shadowColor="#8BC34A"
+            android:text="@string/start"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center">
-
-        <com.example.myfirstapp.RoskiImageButton
-            android:id="@+id/imageButtonF3C1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:background="@drawable/roski_button" />
-
-        <com.example.myfirstapp.RoskiImageButton
-            android:id="@+id/imageButtonF3C2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:background="@drawable/roski_button" />
-
-        <com.example.myfirstapp.RoskiImageButton
-            android:id="@+id/imageButtonF3C3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:background="@drawable/roski_button" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:gravity="center">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_vertical|center_horizontal">
 
         <TextView
-            android:id="@+id/textClock"
+            android:id="@+id/extrascore"
+            android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="left"
-            android:text="TIME 00:00"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
-
-        <TextView
-            android:id="@+id/roskis"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="ROSKIS 000"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
-
+            android:gravity="center_vertical|center_horizontal"
+            android:shadowColor="#926F04"
+            android:shadowDx="-2"
+            android:shadowDy="-2"
+            android:shadowRadius="10"
+            android:text="+20"
+            android:textColor="#FFEB3B"
+            android:textSize="150dp"
+            android:textStyle="bold" />
     </LinearLayout>
 
+</RelativeLayout>
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:shadowColor="#8BC34A"
-        android:text="@string/start"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
-</LinearLayout>
