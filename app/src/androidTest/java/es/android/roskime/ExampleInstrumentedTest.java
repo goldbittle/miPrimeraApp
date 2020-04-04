@@ -1,4 +1,4 @@
-package com.example.myfirstapp;
+package es.android.roskime;
 
 import android.content.Context;
 

@@ -1,6 +1,4 @@
-package com.example.myfirstapp;
-
-import androidx.appcompat.app.AppCompatActivity;
+package es.android.roskime;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -12,12 +10,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.games.Games;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -35,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     Animation animation3 = null;
 
     ArrayList<RoskiImageButton> roskisList = new ArrayList<RoskiImageButton>();
+
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
@@ -416,7 +413,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     private void uploadScore()
     {
-//      Games.getLeaderboardsClient(this, GoogleSignIn.getLastSignedInAccount(this))
+ //       Games.getLeaderboardsClient(this, GoogleSignIn.getLastSignedInAccount(this))
 //              .submitScore(getString(R.string.leaderboard_id), score);
     }
 
