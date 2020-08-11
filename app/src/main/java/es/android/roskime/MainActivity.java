@@ -15,6 +15,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -32,6 +36,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     ArrayList<RoskiImageButton> roskisList = new ArrayList<RoskiImageButton>();
 
+
+    private GoogleSignInClient mGoogleSignInClient = null;
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
@@ -230,6 +236,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         buttonF3C2.setOnTouchListener(this);
         buttonF3C3.setOnTouchListener(this);
 
+        mGoogleSignInClient = GoogleSignIn.getClient(this, GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN);
+
         //Start Button Listener
         startButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -411,10 +419,13 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     }
 
+
+
     private void uploadScore()
     {
- //       Games.getLeaderboardsClient(this, GoogleSignIn.getLastSignedInAccount(this))
-//              .submitScore(getString(R.string.leaderboard_id), score);
+
+
+
     }
 
     private int  getGoal()
